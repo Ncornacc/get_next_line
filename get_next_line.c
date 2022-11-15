@@ -6,7 +6,7 @@
 /*   By: ncornacc <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/01 15:46:12 by ncornacc      #+#    #+#                 */
-/*   Updated: 2022/11/01 16:12:33 by ncornacc      ########   odam.nl         */
+/*   Updated: 2022/11/15 13:41:11 by ncornacc      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,17 @@ char    *get_next_line(int fd)
     char        *line;
 
     if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+    {
+        if (buff != NULL)
+            buff[0] = '\0'; 
         return (0);
+    }
     buff = file_read(fd, buff);
     if (!buff)
+    {
+        buff[0] = '\0';
         return (0);
+    }
     line = ft_get_line(buff);
     buff = ft_next_line(buff);
     return (line);
